@@ -45,20 +45,20 @@ class SinkPortal extends StatelessWidget {
         ],
       },
       {
-        'icon': Icons.fastfood,
+        'icon': Icons.receipt,
         'title': 'Ewaste Management Policies',
         'options': [
           {
-            'icon': Icons.do_not_disturb_alt,
+            'icon': Icons.done_outline,
             'message': "E-waste recycling conserves resources by extracting valuable materials!",
+          },
+          {
+            'icon': Icons.do_not_disturb_alt,
+            'message': "Avoid hoarding unused electronics, donate or recycle them instead",
           },
           {
             'icon': Icons.done_outline,
             'message': "Convenient E-waste collection helps prevent landfill pollution!",
-          },
-          {
-            'icon': Icons.do_not_disturb_alt,
-            'message': "Stringent policies enforce producer accountability in e-waste management!",
           },
         ],
       },

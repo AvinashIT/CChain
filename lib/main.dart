@@ -1,3 +1,4 @@
+import 'package:CCHAIN/SplashScreen.dart';
 import 'package:CCHAIN/helpers/colors.dart';
 import 'package:CCHAIN/screens/Sink/sink_portal.dart';
 import 'package:CCHAIN/screens/calculator/user_input_questions.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity, textSelectionTheme: const TextSelectionThemeData(cursorColor: ColorPallete.color3),
         ),
-        initialRoute: StartScreen.routeName,
+        initialRoute: SplashScreen.routeName,
         // home: ResultScreen(
         //         activityName: "Household",
         //         userEmission: 70,
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           UserInputs.routeName: (context) => UserInputs(),
           ReduceEmissionScreen.routeName: (context) => ReduceEmissionScreen(),
           SinkPortal.routeName: (context) => SinkPortal(),
+          SplashScreen.routeName: (context) => const SplashScreen(),
         },
       ),
     );
