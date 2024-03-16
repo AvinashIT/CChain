@@ -88,7 +88,7 @@ class _SinkPortalState extends State<SinkPortal> {
         'options': [
           {
             'icon': Icons.done_outline,
-            'message': "E-waste recycling conserves resources by extracting valuable materials!",
+            'message': "Manage E-waste to go green!",
           },
           {
             'icon': Icons.do_not_disturb_alt,
