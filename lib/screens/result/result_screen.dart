@@ -11,9 +11,12 @@ class ResultScreen extends StatelessWidget {
 
   static const routeName = "/result";
 
-  ResultScreen(
-      {required Key key, required this.activityName, required this.userEmission, required this.averageEmission,})
-      : super(key: key);
+  ResultScreen({
+    required Key key,
+    required this.activityName,
+    required this.userEmission,
+    required this.averageEmission,
+  }) : super(key: key);
 
   Text toolTipLabel = const Text(
     " kg CO2",
@@ -27,8 +30,6 @@ class ResultScreen extends StatelessWidget {
     return double.parse(value.toStringAsFixed(2));
   }
 
-  // returns the percentage change between
-  // the emission by user and average emission of that category
   double getChangePercentage() {
     double changePercent =
         ((userEmission - averageEmission) / averageEmission) * 100;
@@ -124,7 +125,6 @@ class ResultScreen extends StatelessWidget {
         shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.circular(7),
         ),
-        // type: MaterialType.canvas,
         color: ColorPallete.color3,
         shadowColor: ColorPallete.cardBackground,
         elevation: 3,
@@ -172,7 +172,8 @@ class ResultScreen extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.w300,
               fontSize: 16,
-              color: ColorPallete.color7,),
+              color: ColorPallete.color7,
+            ),
           ),
         ),
         backgroundColor: ColorPallete.background,
@@ -226,17 +227,17 @@ class ResultScreen extends StatelessWidget {
                           rangeSlider: true,
                           disabled: true,
                           min: 0,
-                          // Set a max limit according to the highest value between `userEmission` & `avgEmission`
                           max: values[1] + values[1] / 10,
                           trackBar: FlutterSliderTrackBar(
                             activeDisabledTrackBarColor: trackBarColor,
                             inactiveDisabledTrackBarColor:
-                            ColorPallete.color6,),
+                                ColorPallete.color6,
+                          ),
                           handler: leftHandler,
                           rightHandler: rightHandler,
                           tooltip: FlutterSliderTooltip(
                             positionOffset:
-                            FlutterSliderTooltipPositionOffset(top: -5),
+                                FlutterSliderTooltipPositionOffset(top: -5),
                             boxStyle: const FlutterSliderTooltipBox(
                               decoration: BoxDecoration(
                                 color: ColorPallete.cardBackground,
@@ -267,35 +268,25 @@ class ResultScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Card(
-                      color: ColorPallete.cardBackground,
-                      shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          ReduceEmissionScreen.routeName,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white, backgroundColor: ColorPallete.cardBackground.withBlue(150),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context, ReduceEmissionScreen.routeName,);
-                        },
-                        title: const CoolText(
+                      child: const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: CoolText(
                           "Reduce carbon emissions",
                           fontSize: 18,
                           letterSpacing: 1.1,
-                        ),
-                        subtitle: const Padding(
-                          padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                          child: Text(
-                            "Our earth needs it. Let's move together in this.",
-                            style: TextStyle(
-                              color: ColorPallete.color7,
-                              fontSize: 13,
-                              letterSpacing: 0.7,
-                            ),
-                          ),
-                        ),
-                        trailing: const Icon(
-                          Icons.nature,
-                          color: ColorPallete.color3,
                         ),
                       ),
                     ),

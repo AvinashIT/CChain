@@ -108,7 +108,7 @@ class _UserInputsState extends State<UserInputs> {
                             decoration: InputDecoration(
                               hintText: 'Kg/Kw',
                               hintStyle: const TextStyle(
-                                  color: ColorPallete.color4),
+                                  color: ColorPallete.color4,),
                               suffixIcon: IconButton(
                                 icon: const Icon(
                                   Icons.trending_flat,
@@ -119,13 +119,13 @@ class _UserInputsState extends State<UserInputs> {
                                     return;
                                   }
                                   if (double.tryParse(
-                                      _answerController.text) ==
+                                      _answerController.text,) ==
                                       null) {
                                     // If input is not a valid double, add it as a string
                                     answers.add(_answerController.text);
                                   } else {
                                     answers.add(
-                                        double.parse(_answerController.text));
+                                        double.parse(_answerController.text),);
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
@@ -250,13 +250,13 @@ class _UserInputsState extends State<UserInputs> {
                                     return;
                                   }
                                   if (double.tryParse(
-                                      _answerController.text) ==
+                                      _answerController.text,) ==
                                       null) {
                                     // If input is not a valid double, add it as a string
                                     answers.add(_answerController.text);
                                   } else {
                                     answers.add(
-                                        double.parse(_answerController.text));
+                                        double.parse(_answerController.text),);
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
@@ -377,13 +377,13 @@ class _UserInputsState extends State<UserInputs> {
                                     return;
                                   }
                                   if (double.tryParse(
-                                      _answerController.text) ==
+                                      _answerController.text,) ==
                                       null) {
                                     // If input is not a valid double, add it as a string
                                     answers.add(_answerController.text);
                                   } else {
                                     answers.add(
-                                        double.parse(_answerController.text));
+                                        double.parse(_answerController.text),);
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =

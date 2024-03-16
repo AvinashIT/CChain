@@ -28,7 +28,8 @@ class _SinkPortalState extends State<SinkPortal> {
   }
 
   void _scrollListener() {
-    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+    if (_scrollController.offset >=
+        _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
       setState(() {
         _showHomeButton = true;
@@ -88,11 +89,12 @@ class _SinkPortalState extends State<SinkPortal> {
           },
           {
             'icon': Icons.do_not_disturb_alt,
-            'message': "Avoid hoarding unused electronics, donate or recycle them instead",
+            'message': "Find Nearest E-Waste Management Point",
+            'inputBox': true, // Added to indicate an input box is needed
           },
           {
             'icon': Icons.done_outline,
-            'message': "Convenient E-waste collection helps prevent landfill pollution!",
+            'message': "Inconvenience Today for better Tomorrow",
           },
         ],
       },
@@ -147,14 +149,14 @@ class _SinkPortalState extends State<SinkPortal> {
             ListTile(
               leading: option['image'] != null
                   ? Image.asset(
-                      option['image'],
-                      width: 60, // Adjust width as needed
-                      height: 60, // Adjust height as needed
-                    )
+                option['image'],
+                width: 60, // Adjust width as needed
+                height: 60, // Adjust height as needed
+              )
                   : Icon(
-                      option['icon'],
-                      color: ColorPallete.color3,
-                    ),
+                option['icon'],
+                color: ColorPallete.color3,
+              ),
               title: Text(
                 option['message'],
                 style: const TextStyle(
@@ -162,12 +164,37 @@ class _SinkPortalState extends State<SinkPortal> {
                 ),
               ),
             ),
-            if (reduceEmissionData['icon'] == Icons.card_travel) // Only add Home button if the card is for tree options
+            if (option['inputBox'] == true) // Check if an input box is needed
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.format_list_numbered, // Add the number icon here
+                      color: ColorPallete.color3, // Set the icon color
+                    ),
+                    labelText: 'Enter Pin',
+                    labelStyle: TextStyle(color: ColorPallete.color3),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: ColorPallete
+                          .color3,), // Set the border color here
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  // Set keyboardType to number
+                  style: TextStyle(color: ColorPallete
+                      .color3,), // Set text color inside the text box
+                ),
+              ),
+            if (reduceEmissionData['icon'] == Icons
+                .card_travel) // Only add Home button if the card is for tree options
               SizedBox(
                 width: double.infinity,
                 child: Container(
-                  height: 50, // Adjust height for a pleasing appearance
-                  width: double.infinity, // Set the width to match the Home button
+                  height: 50,
+                  // Adjust height for a pleasing appearance
+                  width: double.infinity,
+                  // Set the width to match the Home button
                   child: Center(
                     child: TextButton.icon(
                       onPressed: () {
@@ -177,17 +204,22 @@ class _SinkPortalState extends State<SinkPortal> {
                         );
                       },
                       icon: const Icon(Icons.shopping_cart,
-                          color: ColorPallete.color3,), // Change the icon color here
+                        color: ColorPallete.color3,),
+                      // Change the icon color here
                       label: const Text(
                         'Buy',
-                        style: TextStyle(color: ColorPallete.color3), // Specify the color for the Buy button text here
+                        style: TextStyle(color: ColorPallete
+                            .color3,), // Specify the color for the Buy button text here
                       ),
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(ColorPallete.cardBackground.withBlue(150)), // Set the background color here
+                        MaterialStateProperty.all<Color>(
+                            ColorPallete.cardBackground.withBlue(150),),
+                        // Set the background color here
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30), // Adjust the border radius for a pleasing shape
+                            borderRadius: BorderRadius.circular(
+                                30,), // Adjust the border radius for a pleasing shape
                           ),
                         ),
                       ),
@@ -243,36 +275,33 @@ class _SinkPortalState extends State<SinkPortal> {
               height: 30,
             ),
             ...getWidgetTree(context),
-            const SizedBox(
-              height: 100,
-            ),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _showHomeButton
           ? FloatingActionButton.extended(
-              shape: BeveledRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              backgroundColor: ColorPallete.cardBackground.withBlue(150),
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  StartScreen.routeName,
-                );
-              },
-              label: const Text(
-                "Home",
-                style: TextStyle(
-                  color: ColorPallete.color3,
-                ),
-              ),
-              icon: const Icon(
-                Icons.home,
-                color: ColorPallete.color3,
-              ),
-            )
+        shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        backgroundColor: ColorPallete.cardBackground.withBlue(150),
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            StartScreen.routeName,
+          );
+        },
+        label: const Text(
+          "Home",
+          style: TextStyle(
+            color: ColorPallete.color3,
+          ),
+        ),
+        icon: const Icon(
+          Icons.home,
+          color: ColorPallete.color3,
+        ),
+      )
           : null,
     );
   }
