@@ -1,8 +1,11 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:CCHAIN/helpers/colors.dart';
 import 'package:CCHAIN/helpers/text_theme.dart';
 import 'package:CCHAIN/screens/Sink/Sink_portal.dart';
 import 'package:CCHAIN/screens/home/startScreen.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:video_player/video_player.dart';
 
 class ReduceEmissionScreen extends StatefulWidget {
@@ -243,7 +246,7 @@ class _ReduceEmissionScreenState extends State<ReduceEmissionScreen> {
 class VideoPlayerWidget extends StatefulWidget {
   final String videoPath;
 
-  const VideoPlayerWidget({Key? key, required this.videoPath}) : super(key: key);
+  const VideoPlayerWidget({super.key, required this.videoPath});
 
   @override
   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:CCHAIN/helpers/colors.dart';
 import 'package:CCHAIN/helpers/text_theme.dart';
 import 'package:CCHAIN/screens/home/startScreen.dart';
@@ -13,6 +15,7 @@ class SinkPortal extends StatefulWidget {
 class _SinkPortalState extends State<SinkPortal> {
   final ScrollController _scrollController = ScrollController();
   bool _showHomeButton = false;
+  int pinCode = 0; // Added pin code variable
 
   @override
   void initState() {
@@ -93,8 +96,8 @@ class _SinkPortalState extends State<SinkPortal> {
             'inputBox': true, // Added to indicate an input box is needed
           },
           {
-            'icon': Icons.done_outline,
-            'message': "Inconvenience Today for better Tomorrow",
+            'icon': Icons.details,
+            'message': pinCode == 605007 ? "Gamil:pudueplan@gmail.com\nPhone:+91 123456789\nAddress:12,efg nagar,Chenni" : pinCode == 605009 ? "Gamil:chneplan@gmail.com\nPhone:+91 987654321\nAddress:4,abc nagar,Pondy" : "Inconvenience Today for better Tomorrow", // Updated message based on pin code
           },
         ],
       },
@@ -165,10 +168,10 @@ class _SinkPortalState extends State<SinkPortal> {
               ),
             ),
             if (option['inputBox'] == true) // Check if an input box is needed
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.format_list_numbered, // Add the number icon here
                       color: ColorPallete.color3, // Set the icon color
@@ -176,25 +179,29 @@ class _SinkPortalState extends State<SinkPortal> {
                     labelText: 'Enter Pin',
                     labelStyle: TextStyle(color: ColorPallete.color3),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: ColorPallete
-                          .color3,), // Set the border color here
+                      borderSide: BorderSide(
+                        color: ColorPallete.color3,
+                      ), // Set the border color here
                     ),
                   ),
                   keyboardType: TextInputType.number,
                   // Set keyboardType to number
-                  style: TextStyle(color: ColorPallete
-                      .color3,), // Set text color inside the text box
+                  style: const TextStyle(
+                    color: ColorPallete.color3,
+                  ), // Set text color inside the text box
+                  onChanged: (value) {
+                    setState(() {
+                      pinCode = int.tryParse(value) ?? 0; // Update the pin code value
+                    });
+                  },
                 ),
               ),
-            if (reduceEmissionData['icon'] == Icons
-                .card_travel) // Only add Home button if the card is for tree options
+            if (reduceEmissionData['icon'] == Icons.card_travel) // Only add Home button if the card is for tree options
               SizedBox(
                 width: double.infinity,
-                child: Container(
-                  height: 50,
-                  // Adjust height for a pleasing appearance
-                  width: double.infinity,
-                  // Set the width to match the Home button
+                child: SizedBox(
+                  height: 50, // Adjust height for a pleasing appearance
+                  width: double.infinity, // Set the width to match the Home button
                   child: Center(
                     child: TextButton.icon(
                       onPressed: () {
@@ -203,23 +210,23 @@ class _SinkPortalState extends State<SinkPortal> {
                           StartScreen.routeName,
                         );
                       },
-                      icon: const Icon(Icons.shopping_cart,
-                        color: ColorPallete.color3,),
-                      // Change the icon color here
+                      icon: const Icon(
+                        Icons.shopping_cart,
+                        color: ColorPallete.color3,
+                      ), // Change the icon color here
                       label: const Text(
                         'Buy',
-                        style: TextStyle(color: ColorPallete
-                            .color3,), // Specify the color for the Buy button text here
+                        style: TextStyle(
+                          color: ColorPallete.color3,
+                        ), // Specify the color for the Buy button text here
                       ),
                       style: ButtonStyle(
-                        backgroundColor:
-                        MaterialStateProperty.all<Color>(
-                            ColorPallete.cardBackground.withBlue(150),),
-                        // Set the background color here
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          ColorPallete.cardBackground.withBlue(150),
+                        ), // Set the background color here
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                30,), // Adjust the border radius for a pleasing shape
+                            borderRadius: BorderRadius.circular(30), // Adjust the border radius for a pleasing shape
                           ),
                         ),
                       ),
