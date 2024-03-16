@@ -8,10 +8,6 @@ class CarbonFootPrint {
   // Assumming that power usage of fan per hour is 65 watts
   static const double kwhUsedByFanPerHour = 0.065;
 
-  // Assumming the TV is LED and is 35 inches in size
-  // Source: https://www.rtings.com/tv/learn/led-oled-power-consumption-and-electricity-cost
- 
-
   // Electricity(kWh)
   static const double emissionPerUnitElectricity = 0.85;
 
@@ -19,7 +15,8 @@ class CarbonFootPrint {
   static const double emissionPerUnitWater = 0.28;
 
   // Petrol(L)
-  static const double emissionPerlitFrieght = 0.1135 ;
+  static const double petrolEmisionFactor= 0.1135;
+  static const double diselEmisionFactor= 0.1322;
 
   static const double emissionPerkgRec = 0.59;
 
@@ -42,16 +39,23 @@ class CarbonFootPrint {
       totalwater * emissionPerUnitWater;
 
     final double emissionDueToFossils =
-      totalfossil * emissionPerlitFrieght;
+      totalfossil * diselEmisionFactor;
     
 
     return emissionDueToElectricity + emissionDueToWater + emissionDueToFossils;
   }
 
   // Get the daily footprint of your travel related activities
-  static double getTravelFootPrint(double distanceTravelledByFrieght,
-  double efficiency, double petrolconsume,) {
-    return (distanceTravelledByFrieght/efficiency)*emissionPerlitFrieght;
+  static double getTravelFootPrint(double numberOfvehicles,
+  double distanceTravelled,double fuelConsumption,String fuel,) {
+    
+    if(fuel == 'petrol'){
+        return numberOfvehicles * distanceTravelled * fuelConsumption * petrolEmisionFactor;
+    }
+    else{
+      return numberOfvehicles * distanceTravelled * fuelConsumption * diselEmisionFactor;
+    }
+    
   }
 
   // Get the daily footprint of your food related activities
@@ -76,6 +80,7 @@ class CarbonFootPrint {
     double travel1,
     double travel2,
     double travel3,
+    String travel4,
 
     // Food
     double recycle1,
@@ -85,7 +90,7 @@ class CarbonFootPrint {
     return getManufacturingFootPrint(
             manu1, manu2, manu3,) +
         getTravelFootPrint(travel1, travel2,
-            travel3,) +
+            travel3,travel4.toLowerCase(),) +
         getRecycleFootPrint(recycle1,recycle2,
             recycle3,);
   }

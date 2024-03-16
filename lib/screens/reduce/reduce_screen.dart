@@ -5,8 +5,42 @@ import 'package:CCHAIN/screens/home/startScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class ReduceEmissionScreen extends StatelessWidget {
+class ReduceEmissionScreen extends StatefulWidget {
   static const routeName = "/reduce-carbon-footprint";
+
+  @override
+  _ReduceEmissionScreenState createState() => _ReduceEmissionScreenState();
+}
+
+class _ReduceEmissionScreenState extends State<ReduceEmissionScreen> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showButtons = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      setState(() {
+        _showButtons = true;
+      });
+    } else {
+      setState(() {
+        _showButtons = false;
+      });
+    }
+  }
 
   List<Widget> getWidgetTree(BuildContext context) {
     final List reduceCarbonFootPrintmsgs = [
@@ -131,6 +165,7 @@ class ReduceEmissionScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorPallete.background,
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             const SizedBox(
@@ -144,7 +179,8 @@ class ReduceEmissionScreen extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: Row(
+      floatingActionButton: _showButtons
+          ? Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
@@ -198,7 +234,8 @@ class ReduceEmissionScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      )
+          : null,
     );
   }
 }
@@ -206,7 +243,7 @@ class ReduceEmissionScreen extends StatelessWidget {
 class VideoPlayerWidget extends StatefulWidget {
   final String videoPath;
 
-  const VideoPlayerWidget({super.key, required this.videoPath});
+  const VideoPlayerWidget({Key? key, required this.videoPath}) : super(key: key);
 
   @override
   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();

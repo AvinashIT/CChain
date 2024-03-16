@@ -15,9 +15,10 @@ final List<String> _manuQuestions = [
 ];
 
 final List<String> _travelQuestions = [
-  "What is the amount distance travelled?",
-  "What is the Efficiency of vehicle?",
-  "What is the amount of fuel consumed?",
+  "What is the number of means of transport",
+  "What is the total distance traveled?",
+  "What is the fuel consumption per kilometer?",
+  "What is the type of fuel utilized?",
 ];
 
 

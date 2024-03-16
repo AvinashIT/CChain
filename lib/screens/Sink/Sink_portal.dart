@@ -3,8 +3,42 @@ import 'package:CCHAIN/helpers/text_theme.dart';
 import 'package:CCHAIN/screens/home/startScreen.dart';
 import 'package:flutter/material.dart';
 
-class SinkPortal extends StatelessWidget {
+class SinkPortal extends StatefulWidget {
   static const routeName = "/Sink_portal";
+
+  @override
+  _SinkPortalState createState() => _SinkPortalState();
+}
+
+class _SinkPortalState extends State<SinkPortal> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showHomeButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      setState(() {
+        _showHomeButton = true;
+      });
+    } else {
+      setState(() {
+        _showHomeButton = false;
+      });
+    }
+  }
 
   List<Widget> getWidgetTree(BuildContext context) {
     final List reduceCarbonFootPrintmsgs = [
@@ -113,14 +147,14 @@ class SinkPortal extends StatelessWidget {
             ListTile(
               leading: option['image'] != null
                   ? Image.asset(
-                option['image'],
-                width: 60, // Adjust width as needed
-                height: 60, // Adjust height as needed
-              )
+                      option['image'],
+                      width: 60, // Adjust width as needed
+                      height: 60, // Adjust height as needed
+                    )
                   : Icon(
-                option['icon'],
-                color: ColorPallete.color3,
-              ),
+                      option['icon'],
+                      color: ColorPallete.color3,
+                    ),
               title: Text(
                 option['message'],
                 style: const TextStyle(
@@ -150,7 +184,7 @@ class SinkPortal extends StatelessWidget {
                       ),
                       style: ButtonStyle(
                         backgroundColor:
-                        MaterialStateProperty.all<Color>(ColorPallete.cardBackground.withBlue(150)), // Set the background color here
+                            MaterialStateProperty.all<Color>(ColorPallete.cardBackground.withBlue(150)), // Set the background color here
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30), // Adjust the border radius for a pleasing shape
@@ -202,6 +236,7 @@ class SinkPortal extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorPallete.background,
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             const SizedBox(
@@ -215,28 +250,30 @@ class SinkPortal extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        backgroundColor: ColorPallete.cardBackground.withBlue(150),
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            StartScreen.routeName,
-          );
-        },
-        label: const Text(
-          "Home",
-          style: TextStyle(
-            color: ColorPallete.color3,
-          ),
-        ),
-        icon: const Icon(
-          Icons.home,
-          color: ColorPallete.color3,
-        ),
-      ),
+      floatingActionButton: _showHomeButton
+          ? FloatingActionButton.extended(
+              shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              backgroundColor: ColorPallete.cardBackground.withBlue(150),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  StartScreen.routeName,
+                );
+              },
+              label: const Text(
+                "Home",
+                style: TextStyle(
+                  color: ColorPallete.color3,
+                ),
+              ),
+              icon: const Icon(
+                Icons.home,
+                color: ColorPallete.color3,
+              ),
+            )
+          : null,
     );
   }
 }

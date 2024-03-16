@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 class UserInputs extends StatefulWidget {
   static const routeName = '/user-inputs';
+
   @override
   _UserInputsState createState() => _UserInputsState();
 }
@@ -29,8 +30,6 @@ class _UserInputsState extends State<UserInputs> {
     final List manuQ = Provider.of<Questions>(context).manuQuestions;
 
     List questions = [];
-
-    // print(args);
 
     if (args == 'Recycle') {
       questions = recQ;
@@ -79,7 +78,6 @@ class _UserInputsState extends State<UserInputs> {
                 child: SizedBox(
                   height: size.height,
                   width: size.width,
-                  //decoration: BoxDecoration(color: ColorPallete.background),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -109,40 +107,46 @@ class _UserInputsState extends State<UserInputs> {
                             controller: _answerController,
                             decoration: InputDecoration(
                               hintText: 'Kg/Kw',
-                              hintStyle:
-                              const TextStyle(color: ColorPallete.color4),
+                              hintStyle: const TextStyle(
+                                  color: ColorPallete.color4),
                               suffixIcon: IconButton(
                                 icon: const Icon(
                                   Icons.trending_flat,
                                   color: ColorPallete.color3,
                                 ),
                                 onPressed: () {
-                                  if (_answerController.text == '' ||
-                                      _answerController is String) {
+                                  if (_answerController.text.isEmpty) {
                                     return;
                                   }
-                                  answers.add(double.parse(
-                                    _answerController.text,),);
+                                  if (double.tryParse(
+                                      _answerController.text) ==
+                                      null) {
+                                    // If input is not a valid double, add it as a string
+                                    answers.add(_answerController.text);
+                                  } else {
+                                    answers.add(
+                                        double.parse(_answerController.text));
+                                  }
                                   if (index == questions.length - 1) {
-                                    // print(answers);
-
-                                    final double footprint = CarbonFootPrint
-                                        .getRecycleFootPrint(
+                                    final double footprint =
+                                    CarbonFootPrint.getRecycleFootPrint(
                                       answers[0],
                                       answers[1],
-                                      answers[2],);
+                                      answers[2],
+                                    );
 
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResultScreen(
-                                              userEmission: footprint,
-                                              averageEmission:
-                                              CarbonFootPrint
-                                                  .avgEmissionDueToRecyclePerDay,
-                                              activityName: "Recycle Unit",key:UniqueKey(),
-                                            ),),);
+                                        builder: (context) => ResultScreen(
+                                          userEmission: footprint,
+                                          averageEmission: CarbonFootPrint
+                                              .avgEmissionDueToRecyclePerDay,
+                                          activityName: "Recycle Unit",
+                                          key: UniqueKey(),
+                                        ),
+                                      ),
+                                    );
                                   } else {
                                     index++;
                                   }
@@ -204,7 +208,6 @@ class _UserInputsState extends State<UserInputs> {
                 child: SizedBox(
                   height: size.height,
                   width: size.width,
-                  //decoration: BoxDecoration(color: ColorPallete.background),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -212,7 +215,8 @@ class _UserInputsState extends State<UserInputs> {
                       Align(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 40.0,),
+                            horizontal: 40.0,
+                          ),
                           child: Text(
                             questions[index],
                             textAlign: TextAlign.center,
@@ -234,45 +238,47 @@ class _UserInputsState extends State<UserInputs> {
                             decoration: InputDecoration(
                               hintText: 'Km/Lt',
                               hintStyle: const TextStyle(
-                                color: ColorPallete.color4,),
-                              //enabledBorder: InputBorder.none,
-                              //filled: true,
-                              //fillColor: ColorPallete.background.withBlue(-200),
+                                color: ColorPallete.color4,
+                              ),
                               suffixIcon: IconButton(
                                 icon: const Icon(
                                   Icons.trending_flat,
                                   color: ColorPallete.color3,
                                 ),
                                 onPressed: () {
-                                  if (_answerController.text == '' ||
-                                      _answerController is String) {
+                                  if (_answerController.text.isEmpty) {
                                     return;
                                   }
-                                  answers.add(double.parse(
-                                    _answerController.text,),);
-
+                                  if (double.tryParse(
+                                      _answerController.text) ==
+                                      null) {
+                                    // If input is not a valid double, add it as a string
+                                    answers.add(_answerController.text);
+                                  } else {
+                                    answers.add(
+                                        double.parse(_answerController.text));
+                                  }
                                   if (index == questions.length - 1) {
-                                    // print(answers);
-
-                                    final double footprint = CarbonFootPrint
-                                        .getTravelFootPrint(
+                                    final double footprint =
+                                    CarbonFootPrint.getTravelFootPrint(
                                       answers[0],
                                       answers[1],
-                                      answers[2],);
+                                      answers[2],
+                                      answers[3],
+                                    );
 
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResultScreen(
-                                              userEmission:
-                                              footprint,
-                                              averageEmission:
-                                              CarbonFootPrint
-                                                  .avgEmissionDueToManufacture,
-                                              activityName:
-                                              "Transport Unit", key: UniqueKey(),
-                                            ),),);
+                                        builder: (context) => ResultScreen(
+                                          userEmission: footprint,
+                                          averageEmission: CarbonFootPrint
+                                              .avgEmissionDueToManufacture,
+                                          activityName: "Transport Unit",
+                                          key: UniqueKey(),
+                                        ),
+                                      ),
+                                    );
                                   } else {
                                     index++;
                                   }
@@ -287,7 +293,7 @@ class _UserInputsState extends State<UserInputs> {
                               ),
                             ),
                             textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             style: const TextStyle(
                               color: ColorPallete.color3,
                             ),
@@ -329,7 +335,6 @@ class _UserInputsState extends State<UserInputs> {
                 child: SizedBox(
                   height: size.height,
                   width: size.width,
-                  //decoration: BoxDecoration(color: ColorPallete.background),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -337,7 +342,8 @@ class _UserInputsState extends State<UserInputs> {
                       Align(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 40.0,),
+                            horizontal: 40.0,
+                          ),
                           child: Text(
                             questions[index],
                             textAlign: TextAlign.center,
@@ -359,42 +365,44 @@ class _UserInputsState extends State<UserInputs> {
                             decoration: InputDecoration(
                               hintText: index == 3 ? '' : 'Kg/Kw',
                               hintStyle: const TextStyle(
-                                color: ColorPallete.color4,),
-                              //enabledBorder: InputBorder.none,
-                              //filled: true,
-                              //fillColor: ColorPallete.background.withBlue(-200),
+                                color: ColorPallete.color4,
+                              ),
                               suffixIcon: IconButton(
                                 icon: const Icon(
                                   Icons.trending_flat,
                                   color: ColorPallete.color3,
                                 ),
                                 onPressed: () {
-                                  if (_answerController.text == '' ||
-                                      _answerController is String) {
+                                  if (_answerController.text.isEmpty) {
                                     return;
                                   }
-                                  answers.add(double.parse(
-                                    _answerController.text,),);
-
+                                  if (double.tryParse(
+                                      _answerController.text) ==
+                                      null) {
+                                    // If input is not a valid double, add it as a string
+                                    answers.add(_answerController.text);
+                                  } else {
+                                    answers.add(
+                                        double.parse(_answerController.text));
+                                  }
                                   if (index == questions.length - 1) {
-                                    // print(answers);
-
-                                    final double footprint = CarbonFootPrint
-                                        .getManufacturingFootPrint(
+                                    final double footprint =
+                                    CarbonFootPrint.getManufacturingFootPrint(
                                       answers[0],
                                       answers[1],
-                                      answers[2],);
+                                      answers[2],
+                                    );
 
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResultScreen(
-                                              userEmission: footprint,
-                                              averageEmission: CarbonFootPrint
-                                                  .avgEmissionDueToTravel,
-                                              activityName: "Manufacture Unit", key: UniqueKey(),
-                                            ),
+                                        builder: (context) => ResultScreen(
+                                          userEmission: footprint,
+                                          averageEmission: CarbonFootPrint
+                                              .avgEmissionDueToTravel,
+                                          activityName: "Manufacture Unit",
+                                          key: UniqueKey(),
+                                        ),
                                       ),
                                     );
                                   } else {
