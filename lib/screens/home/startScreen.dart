@@ -1,4 +1,7 @@
 import 'package:CCHAIN/helpers/colors.dart';
+import 'package:CCHAIN/screens/Intermediate/TransportBluetooth.dart';
+import 'package:CCHAIN/screens/Intermediate/manuOmr.dart';
+import 'package:CCHAIN/screens/Intermediate/recOmr.dart';
 import 'package:CCHAIN/screens/calculator/user_inputs.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -91,7 +94,6 @@ class StartScreen extends StatelessWidget {
               const SizedBox(
                 height: 8.0,
               ),
-              
               const CustomCard(
                 'Recycle',
                 'assets/images/Recycle.png',
@@ -105,7 +107,7 @@ class StartScreen extends StatelessWidget {
         ),
       ),
     );
-  } 
+  }
 }
 
 class CustomCard extends StatelessWidget {
@@ -125,11 +127,26 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          routeName,
-          arguments: arg,
-        );
+        if (title == 'Transport') {
+          Navigator.pushNamed(
+            context,
+            TransportBluetooth.routeName,
+            arguments: arg,
+          );
+        } else if (title == 'Manufacture') {
+          Navigator.pushNamed(
+            context,
+            ManuOme.routeName,
+            arguments: arg,
+          );
+        }
+        else{
+          Navigator.pushNamed(
+            context,
+            RecOmr.routeName,
+            arguments: arg,
+          );
+        }
       },
       child: Container(
         height: 150,
@@ -157,11 +174,13 @@ class CustomCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
-                      style: kTextStyle.copyWith(
-                        fontSize: 26,
-                        fontWeight: FontWeight.w600,
-                      ),),
+                  Text(
+                    title,
+                    style: kTextStyle.copyWith(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const Text(
                     'Calculate your carbon footprint.',
                     style: TextStyle(
@@ -180,17 +199,18 @@ class CustomCard extends StatelessWidget {
 }
 
 RichText myText = RichText(
-    text: TextSpan(
-  children: [
-    TextSpan(
-      text: 'Hey there! ',
-      style: kTextStyle.copyWith(
-        fontFamily: "Orbitron",
+  text: TextSpan(
+    children: [
+      TextSpan(
+        text: 'Hey there! ',
+        style: kTextStyle.copyWith(
+          fontFamily: "Orbitron",
+        ),
       ),
-    ),
-    const TextSpan(
-      text: '👋',
-      style: TextStyle(fontSize: 20),
-    ),
-  ],
-),);
+      const TextSpan(
+        text: '👋',
+        style: TextStyle(fontSize: 20),
+      ),
+    ],
+  ),
+);
