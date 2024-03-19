@@ -56,7 +56,7 @@ class StartScreen extends StatelessWidget {
                   horizontal: 20,
                 ),
                 child: TypewriterAnimatedTextKit(
-                  speed: const Duration(seconds: 1),
+                  speed: const Duration(milliseconds: 150),
                   text: const ['Greetings!', 'Begin Your Sustainability Journey', 'Start today!'],
                   textStyle: kTextStyle.copyWith(
                     fontFamily: "Orbitron",

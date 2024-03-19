@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 class SplashScreen extends StatefulWidget {
 	static const routeName = "/SplashScreen";
 
-	const SplashScreen({super.key});
+	const SplashScreen({Key? key}) : super(key: key);
 
 	@override
 	State<SplashScreen> createState() => _SplashScreenState();
@@ -49,31 +49,33 @@ class _SplashScreenState extends State<SplashScreen>
 						end: Alignment.bottomLeft,
 					),
 				),
-				child: Column(
-					mainAxisAlignment: MainAxisAlignment.center,
-					children: [
-						Image.asset(
-							"assets/images/logo.png", // Change path as per your image location
-							height: 150,
-							width: 150,
-						),
-						const SizedBox(height: 20), // Adding space between image and text
-						const Text(
-							'Carbon chain',
-							style: TextStyle(
-								color: ColorPallete.color3, // Custom color
-								fontSize: 35,
+				child: Center( // Center widget added here
+					child: Column(
+						mainAxisAlignment: MainAxisAlignment.center,
+						children: [
+							Image.asset(
+								"assets/images/logo.png", // Change path as per your image location
+								height: 150,
+								width: 150,
 							),
-						),
-						const SizedBox(height: 20), // Adding space between text and quote
-						const Text(
-							"Let's measure, reduce, and thrive",
-							style: TextStyle(
-								color: ColorPallete.color3, // Same color as "Carbon chain"
-								fontSize: 20,
+							const SizedBox(height: 20), // Adding space between image and text
+							const Text(
+								'Carbon chain',
+								style: TextStyle(
+									color: ColorPallete.color3, // Custom color
+									fontSize: 35,
+								),
 							),
-						),
-					],
+							const SizedBox(height: 20), // Adding space between text and quote
+							const Text(
+								"Let's measure, reduce, and thrive",
+								style: TextStyle(
+									color: ColorPallete.color3, // Same color as "Carbon chain"
+									fontSize: 20,
+								),
+							),
+						],
+					),
 				),
 			),
 		);

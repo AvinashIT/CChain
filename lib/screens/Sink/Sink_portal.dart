@@ -97,7 +97,7 @@ class _SinkPortalState extends State<SinkPortal> {
           },
           {
             'icon': Icons.details,
-            'message': pinCode == 605007 ? "Gmail:pudueplan@gmail.com\nPhone:+91 123456789\n4,Jaya Nagar,Pondy" : pinCode == 605009 ? "Gmail:chneplan@gmail.com\nPhone:+91 987654321\nAddress:12,Raja nagar,Chennai" : "Inconvenience Today for better Tomorrow", // Updated message based on pin code
+            'message': pinCode == 605007 ? "Gmail:pudueplan@gmail.com\nPhone:+91 123456789\n4,Jaya Nagar,Pondy" : pinCode == 605009 ? "Gmail:chneplan@gmail.com\nPhone:+91 987654321\nAddress:12,Raja nagar,Chennai" : "Inconvenience Today for a better Tomorrow", // Updated message based on pin code
           },
         ],
       },
