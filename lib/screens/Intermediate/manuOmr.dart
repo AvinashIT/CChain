@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:CCHAIN/helpers/colors.dart';
 import 'package:CCHAIN/screens/calculator/user_inputs.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:flutter/material.dart';
 
 const TextStyle kTextStyle = TextStyle(
   fontSize: 24.0,
@@ -46,7 +46,6 @@ class ManuOme extends StatelessWidget {
         child: SingleChildScrollView(
           child: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
                   height: 200,
@@ -91,7 +90,7 @@ class ManuOme extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               'Company',
                               style: TextStyle(
@@ -112,12 +111,12 @@ class ManuOme extends StatelessWidget {
                                   value: type,
                                   child: Text(
                                     type,
-                                    style: TextStyle(fontSize: 16),
+                                    style: const TextStyle(fontSize: 16),
                                   ),
                                 );
                               }).toList(),
-                              style: TextStyle(color: ColorPallete.color3),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: ColorPallete.color3),
+                              decoration: const InputDecoration(
                                 labelText: 'Select Company',
                                 labelStyle: TextStyle(color: ColorPallete.color3),
                                 border: OutlineInputBorder(
@@ -133,10 +132,10 @@ class ManuOme extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               'Meter ID',
                               style: TextStyle(
@@ -152,8 +151,8 @@ class ManuOme extends StatelessWidget {
                               child: TextField(
                                 controller: input2Controller,
                                 keyboardType: TextInputType.text,
-                                style: TextStyle(color: ColorPallete.color3),
-                                decoration: InputDecoration(
+                                style: const TextStyle(color: ColorPallete.color3),
+                                decoration: const InputDecoration(
                                   labelText: 'Enter ID',
                                   labelStyle: TextStyle(color: ColorPallete.color3),
                                   border: OutlineInputBorder(
@@ -165,10 +164,10 @@ class ManuOme extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               'Material Type',
                               style: TextStyle(
@@ -191,12 +190,12 @@ class ManuOme extends StatelessWidget {
                                     value: cc,
                                     child: Text(
                                       cc,
-                                      style: TextStyle(fontSize: 16),
+                                      style: const TextStyle(fontSize: 16),
                                     ),
                                   );
                                 }).toList(),
-                                style: TextStyle(color: ColorPallete.color3),
-                                decoration: InputDecoration(
+                                style: const TextStyle(color: ColorPallete.color3),
+                                decoration: const InputDecoration(
                                   labelText: 'Select Type',
                                   labelStyle: TextStyle(color: ColorPallete.color3),
                                   border: OutlineInputBorder(
@@ -213,10 +212,10 @@ class ManuOme extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               'Ohm ID',
                               style: TextStyle(
@@ -232,8 +231,8 @@ class ManuOme extends StatelessWidget {
                               child: TextField(
                                 controller: input4Controller,
                                 keyboardType: TextInputType.text,
-                                style: TextStyle(color: ColorPallete.color3),
-                                decoration: InputDecoration(
+                                style: const TextStyle(color: ColorPallete.color3),
+                                decoration: const InputDecoration(
                                   labelText: 'Enter ID',
                                   labelStyle: TextStyle(color: ColorPallete.color3),
                                   border: OutlineInputBorder(
@@ -271,7 +270,7 @@ class ManuOme extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 270), // Add some space between the buttons
+          const SizedBox(width: 270), // Add some space between the buttons
           FloatingActionButton(
             onPressed: () {
               Navigator.pushNamed(context, UserInputs.routeName, arguments: 'manufacture');
