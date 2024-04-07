@@ -75,7 +75,7 @@ class ManuOme extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
-                    'Recycling today for a cleaner tomorrow',
+                    'Revolutionizing Industries, Preserving the Planet',
                     style: kTextStyle.copyWith(
                       fontSize: 16,
                     ),
@@ -128,6 +128,7 @@ class ManuOme extends StatelessWidget {
                                 ),
                               ),
                               dropdownColor: ColorPallete.color4,
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                         ],
@@ -207,6 +208,7 @@ class ManuOme extends StatelessWidget {
                                   ),
                                 ),
                                 dropdownColor: ColorPallete.color4,
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),

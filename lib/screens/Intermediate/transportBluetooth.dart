@@ -75,7 +75,7 @@ class TransportBluetooth extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
-                    'Recycling today for a cleaner tomorrow',
+                    'Turning Wheels, Cutting Emissions',
                     style: kTextStyle.copyWith(
                       fontSize: 16,
                     ),
@@ -128,6 +128,7 @@ class TransportBluetooth extends StatelessWidget {
                                 ),
                               ),
                               dropdownColor: ColorPallete.color4,
+                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                         ],
@@ -178,6 +179,7 @@ class TransportBluetooth extends StatelessWidget {
                           ),
                           Expanded(
                             flex: 2,
+
                             child: Padding(
                               padding: const EdgeInsets.only(left: 1.0), // Adjusted padding here
                               child: DropdownButtonFormField<String>(
@@ -207,6 +209,7 @@ class TransportBluetooth extends StatelessWidget {
                                   ),
                                 ),
                                 dropdownColor: ColorPallete.color4,
+                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),
