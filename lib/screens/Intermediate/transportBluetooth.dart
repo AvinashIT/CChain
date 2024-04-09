@@ -118,10 +118,12 @@ class _TransportBluetoothState extends State<TransportBluetooth> {
                               items: vehicleTypes.map((type) {
                                 return DropdownMenuItem<String>(
                                   value: type,
-                                  child: Text(
-                                    type,
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
+                
+                                    child: Text(
+                                      type,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                
                                 );
                               }).toList(),
                               style: const TextStyle(color: ColorPallete.color3),
@@ -137,6 +139,7 @@ class _TransportBluetoothState extends State<TransportBluetooth> {
                                 ),
                               ),
                               dropdownColor: ColorPallete.color4,
+                              icon: Container(),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -219,6 +222,7 @@ class _TransportBluetoothState extends State<TransportBluetooth> {
                                   ),
                                 ),
                                 dropdownColor: ColorPallete.color4,
+                                icon: Container(),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
