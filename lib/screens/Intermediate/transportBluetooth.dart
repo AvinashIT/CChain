@@ -27,8 +27,14 @@ const TextStyle kTextStyle = TextStyle(
   ],
 );
 
-class TransportBluetooth extends StatelessWidget {
+class TransportBluetooth extends StatefulWidget {
   static const String routeName = '/Transport_Bluetooth';
+
+  @override
+  _TransportBluetoothState createState() => _TransportBluetoothState();
+}
+
+class _TransportBluetoothState extends State<TransportBluetooth> {
   TextEditingController nameController = TextEditingController();
   TextEditingController input1Controller = TextEditingController();
   TextEditingController input2Controller = TextEditingController();
@@ -37,6 +43,7 @@ class TransportBluetooth extends StatelessWidget {
   List<String> vehicleTypes = ['BlueDart', 'DHL', 'Amazon', 'Agarwal Packets'];
   String selectedVehicleType = 'DHL'; // Default value
   String selectedType = 'Truck'; // Default value for CC dropdown
+  bool showButtons = true;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +111,9 @@ class TransportBluetooth extends StatelessWidget {
                             child: DropdownButtonFormField<String>(
                               value: selectedVehicleType,
                               onChanged: (value) {
-                                selectedVehicleType = value!;
+                                setState(() {
+                                  selectedVehicleType = value!;
+                                });
                               },
                               items: vehicleTypes.map((type) {
                                 return DropdownMenuItem<String>(
@@ -128,7 +137,7 @@ class TransportBluetooth extends StatelessWidget {
                                 ),
                               ),
                               dropdownColor: ColorPallete.color4,
-                               borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                         ],
@@ -179,13 +188,14 @@ class TransportBluetooth extends StatelessWidget {
                           ),
                           Expanded(
                             flex: 2,
-
                             child: Padding(
                               padding: const EdgeInsets.only(left: 1.0), // Adjusted padding here
                               child: DropdownButtonFormField<String>(
                                 value: selectedType,
                                 onChanged: (value) {
-                                  selectedType = value!;
+                                  setState(() {
+                                    selectedType = value!;
+                                  });
                                 },
                                 items: ['Truck', 'Bus', 'Car', 'Bike'].map((cc) {
                                   return DropdownMenuItem<String>(
@@ -209,7 +219,7 @@ class TransportBluetooth extends StatelessWidget {
                                   ),
                                 ),
                                 dropdownColor: ColorPallete.color4,
-                                 borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),
@@ -242,6 +252,16 @@ class TransportBluetooth extends StatelessWidget {
                                     borderSide: BorderSide(color: ColorPallete.color3),
                                   ),
                                 ),
+                                onTap: () {
+                                  setState(() {
+                                    showButtons = false;
+                                  });
+                                },
+                                onEditingComplete: () {
+                                  setState(() {
+                                    showButtons = true;
+                                  });
+                                },
                               ),
                             ),
                           ),
@@ -255,7 +275,9 @@ class TransportBluetooth extends StatelessWidget {
           ),
         ),
       ),
-        floatingActionButton: Row(
+      floatingActionButton: Visibility(
+        visible: MediaQuery.of(context).viewInsets.bottom == 0,
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
@@ -291,7 +313,7 @@ class TransportBluetooth extends StatelessWidget {
             ),
           ],
         ),
-
+      ),
     );
   }
 }

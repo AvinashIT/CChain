@@ -74,7 +74,7 @@ class _SinkPortalState extends State<SinkPortal> {
           },
           {
             'image': 'assets/images/autumn.png',
-            'message': 'Autumn trees can store and absorb about 100 pounds of CO2 per year.',
+            'message': 'Palm trees can store and absorb about 50 to 100 pounds of CO2 per year.',
           },
           {
             'image': 'assets/images/pine.png',

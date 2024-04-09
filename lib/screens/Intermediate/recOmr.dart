@@ -254,7 +254,9 @@ class RecOmr extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Row(
+      floatingActionButton: Visibility(
+        visible: MediaQuery.of(context).viewInsets.bottom == 0,
+        child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
@@ -290,7 +292,7 @@ class RecOmr extends StatelessWidget {
           ),
         ],
       ),
-
+      )
     );
   }
 }

@@ -254,43 +254,45 @@ class ManuOme extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, UserInputs.routeName, arguments: 'manufacture');
-            },
-            backgroundColor: ColorPallete.cardBackground.withBlue(150),
-            shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Text(
-              'Skip',
-              style: TextStyle(
-                color: ColorPallete.color3,
+      floatingActionButton: Visibility(
+        visible: MediaQuery.of(context).viewInsets.bottom == 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, UserInputs.routeName, arguments: 'manufacture');
+              },
+              backgroundColor: ColorPallete.cardBackground.withBlue(150),
+              shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text(
+                'Skip',
+                style: TextStyle(
+                  color: ColorPallete.color3,
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 270), // Add some space between the buttons
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.pushNamed(context, UserInputs.routeName, arguments: 'manufacture');
-            },
-            backgroundColor: ColorPallete.cardBackground.withBlue(150),
-            shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Text(
-              'Next',
-              style: TextStyle(
-                color: ColorPallete.color3,
+            const SizedBox(width: 270), // Add some space between the buttons
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, UserInputs.routeName, arguments: 'manufacture');
+              },
+              backgroundColor: ColorPallete.cardBackground.withBlue(150),
+              shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text(
+                'Next',
+                style: TextStyle(
+                  color: ColorPallete.color3,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-
     );
   }
 }
