@@ -52,15 +52,18 @@ class _SinkPortalState extends State<SinkPortal> {
         'options': [
           {
             'icon': Icons.nature,
-            'message': "Nature is the best remedy for reducing carbon emissions and nurturing our planet's health",
+            'message':
+            "Nature is the best remedy for reducing carbon emissions and nurturing our planet's health",
           },
           {
             'icon': Icons.next_plan,
-            'message': 'Participate in preserving the planet from carbon emissions and climate change',
+            'message':
+            'Participate in preserving the planet from carbon emissions and climate change',
           },
           {
             'icon': Icons.done_outline,
-            'message': "Balance the carbon footprint and secure the future by planting trees",
+            'message':
+            "Balance the carbon footprint and secure the future by planting trees",
           },
         ],
       },
@@ -70,15 +73,24 @@ class _SinkPortalState extends State<SinkPortal> {
         'options': [
           {
             'image': 'assets/images/tree.png',
-            'message': 'Oak trees are known to absorb and store about 48 pounds of CO2 per year',
+            'message':
+            'Oak trees are known to absorb and store about 48 pounds of CO2 per year',
+            'qrImage': 'assets/images/qr.png',
+            'qrText': 'Oak Tree',
           },
           {
             'image': 'assets/images/autumn.png',
-            'message': 'Palm trees can store and absorb about 50 to 100 pounds of CO2 per year.',
+            'message':
+            'Palm trees can store and absorb about 50 to 100 pounds of CO2 per year.',
+            'qrImage': 'assets/images/qr.png',
+            'qrText': 'Palm Tree',
           },
           {
             'image': 'assets/images/pine.png',
-            'message': "Pine trees typically store and absorb around 30 pounds of CO2 per year",
+            'message':
+            "Pine trees typically store and absorb around 30 pounds of CO2 per year",
+            'qrImage': 'assets/images/qr.png',
+            'qrText': 'Pine Tree',
           },
         ],
       },
@@ -97,7 +109,11 @@ class _SinkPortalState extends State<SinkPortal> {
           },
           {
             'icon': Icons.details,
-            'message': pinCode == 605007 ? "Gmail:pudueplan@gmail.com\nPhone:+91 123456789\n4,Jaya Nagar,Pondy" : pinCode == 605009 ? "Gmail:chneplan@gmail.com\nPhone:+91 987654321\nAddress:12,Raja nagar,Chennai" : "Inconvenience Today for a better Tomorrow", // Updated message based on pin code
+            'message': pinCode == 605007
+                ? "Gmail:pudueplan@gmail.com\nPhone:+91 123456789\n4,Jaya Nagar,Pondy"
+                : pinCode == 605009
+                ? "Gmail:chneplan@gmail.com\nPhone:+91 987654321\nAddress:12,Raja nagar,Chennai"
+                : "Inconvenience Today for a better Tomorrow", // Updated message based on pin code
           },
         ],
       },
@@ -196,7 +212,8 @@ class _SinkPortalState extends State<SinkPortal> {
                   },
                 ),
               ),
-            if (reduceEmissionData['icon'] == Icons.card_travel) // Only add Home button if the card is for tree options
+            if (reduceEmissionData['icon'] ==
+                Icons.card_travel) // Only add Home button if the card is for tree options
               SizedBox(
                 width: double.infinity,
                 child: SizedBox(
@@ -205,10 +222,7 @@ class _SinkPortalState extends State<SinkPortal> {
                   child: Center(
                     child: TextButton.icon(
                       onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          StartScreen.routeName,
-                        );
+                        _showImageDialog(context, option['qrImage'], option['qrText']); // Show image dialog on Buy button press
                       },
                       icon: const Icon(
                         Icons.shopping_cart,
@@ -226,7 +240,8 @@ class _SinkPortalState extends State<SinkPortal> {
                         ), // Set the background color here
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30), // Adjust the border radius for a pleasing shape
+                            borderRadius: BorderRadius.circular(
+                                30), // Adjust the border radius for a pleasing shape
                           ),
                         ),
                       ),
@@ -270,6 +285,60 @@ class _SinkPortalState extends State<SinkPortal> {
     return parentWidgetTree;
   }
 
+  void _showImageDialog(BuildContext context, String qrImage, String qrText) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: ColorPallete.cardBackground,
+          title: Text(
+            qrText,
+            style: TextStyle(color: ColorPallete.color3), // Set text color here
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                qrImage,
+                width: 200, // Adjust the width of the image as needed
+                height: 200, // Adjust the height of the image as needed
+              ),
+              // Static text for Name, Location, and Contact
+              Text(
+                'Name: farmer1',
+                style: TextStyle(color: ColorPallete.color3),
+              ),
+              Text(
+                'Location: puducerry',
+                style: TextStyle(color: ColorPallete.color3),
+              ),
+              Text(
+                'Contact: 122345667',
+                style: TextStyle(color: ColorPallete.color3),
+              ),
+
+              Text(
+                'Price: 500 INR/per tree',
+                style: TextStyle(color: ColorPallete.color3),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Close",
+                style: TextStyle(color: ColorPallete.color3), // Set text color here
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -291,7 +360,8 @@ class _SinkPortalState extends State<SinkPortal> {
         shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        backgroundColor: ColorPallete.cardBackground.withBlue(150),
+        backgroundColor:
+        ColorPallete.cardBackground.withBlue(150),
         onPressed: () {
           Navigator.pushNamed(
             context,

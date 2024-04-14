@@ -225,7 +225,7 @@ class _ReduceEmissionScreenState extends State<ReduceEmissionScreen> {
                 );
               },
               label: const Text(
-                "News",
+                "Sink",
                 style: TextStyle(
                   color: ColorPallete.color3,
                 ),
