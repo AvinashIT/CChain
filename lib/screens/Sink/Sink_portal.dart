@@ -55,22 +55,22 @@ class _SinkPortalState extends State<SinkPortal> {
     final List reduceCarbonFootPrintmsgs = [
       {
         'icon': Icons.balance,
-        'title': "Balancing carbon emissions through tree planting",
+        'title': "Balance carbon emissions by planting trees",
         'options': [
           {
             'icon': Icons.nature,
             'message':
-                "Nature is the best remedy for reducing carbon emissions and nurturing our planet's health",
+                "Nature is the best remedy for reducing co2 emissions",
           },
           {
             'icon': Icons.next_plan,
             'message':
-                'Participate in preserving the planet from carbon emissions and climate change',
+                'Participate in preserving the planet',
           },
           {
             'icon': Icons.done_outline,
             'message':
-                "Balance the carbon footprint and secure the future by planting trees",
+                "Balance the carbon footprint and secure the future",
           },
         ],
       },
