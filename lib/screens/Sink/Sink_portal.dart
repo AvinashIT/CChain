@@ -2,8 +2,8 @@
 
 import 'package:CCHAIN/helpers/colors.dart';
 import 'package:CCHAIN/helpers/text_theme.dart';
-import 'package:CCHAIN/screens/home/startScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SinkPortal extends StatefulWidget {
   static const routeName = "/Sink_portal";
@@ -15,7 +15,6 @@ class SinkPortal extends StatefulWidget {
 class _SinkPortalState extends State<SinkPortal> {
   final ScrollController _scrollController = ScrollController();
   bool _showHomeButton = false;
-  int pinCode = 0; // Added pin code variable
 
   @override
   void initState() {
@@ -43,6 +42,14 @@ class _SinkPortalState extends State<SinkPortal> {
       });
     }
   }
+   void _openGoogleMaps() async {
+    const url = 'https://www.google.com/maps?q=e_waste_management';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   List<Widget> getWidgetTree(BuildContext context) {
     final List reduceCarbonFootPrintmsgs = [
@@ -53,17 +60,17 @@ class _SinkPortalState extends State<SinkPortal> {
           {
             'icon': Icons.nature,
             'message':
-            "Nature is the best remedy for reducing carbon emissions and nurturing our planet's health",
+                "Nature is the best remedy for reducing carbon emissions and nurturing our planet's health",
           },
           {
             'icon': Icons.next_plan,
             'message':
-            'Participate in preserving the planet from carbon emissions and climate change',
+                'Participate in preserving the planet from carbon emissions and climate change',
           },
           {
             'icon': Icons.done_outline,
             'message':
-            "Balance the carbon footprint and secure the future by planting trees",
+                "Balance the carbon footprint and secure the future by planting trees",
           },
         ],
       },
@@ -74,21 +81,21 @@ class _SinkPortalState extends State<SinkPortal> {
           {
             'image': 'assets/images/tree.png',
             'message':
-            'Oak trees are known to absorb and store about 48 pounds of CO2 per year',
+                'Oak trees are known to absorb and store about 48 pounds of CO2 per year',
             'qrImage': 'assets/images/qr.png',
             'qrText': 'Oak Tree',
           },
           {
             'image': 'assets/images/autumn.png',
             'message':
-            'Palm trees can store and absorb about 50 to 100 pounds of CO2 per year.',
+                'Palm trees can store and absorb about 50 to 100 pounds of CO2 per year.',
             'qrImage': 'assets/images/qr.png',
             'qrText': 'Palm Tree',
           },
           {
             'image': 'assets/images/pine.png',
             'message':
-            "Pine trees typically store and absorb around 30 pounds of CO2 per year",
+                "Pine trees typically store and absorb around 30 pounds of CO2 per year",
             'qrImage': 'assets/images/qr.png',
             'qrText': 'Pine Tree',
           },
@@ -105,15 +112,6 @@ class _SinkPortalState extends State<SinkPortal> {
           {
             'icon': Icons.do_not_disturb_alt,
             'message': "Find Nearest E-Waste Management Point",
-            'inputBox': true, // Added to indicate an input box is needed
-          },
-          {
-            'icon': Icons.details,
-            'message': pinCode == 605007
-                ? "Gmail:pudueplan@gmail.com\nPhone:+91 123456789\n4,Jaya Nagar,Pondy"
-                : pinCode == 605009
-                ? "Gmail:chneplan@gmail.com\nPhone:+91 987654321\nAddress:12,Raja nagar,Chennai"
-                : "Inconvenience Today for a better Tomorrow", // Updated message based on pin code
           },
         ],
       },
@@ -168,14 +166,14 @@ class _SinkPortalState extends State<SinkPortal> {
             ListTile(
               leading: option['image'] != null
                   ? Image.asset(
-                option['image'],
-                width: 60, // Adjust width as needed
-                height: 60, // Adjust height as needed
-              )
+                      option['image'],
+                      width: 60,
+                      height: 60,
+                    )
                   : Icon(
-                option['icon'],
-                color: ColorPallete.color3,
-              ),
+                      option['icon'],
+                      color: ColorPallete.color3,
+                    ),
               title: Text(
                 option['message'],
                 style: const TextStyle(
@@ -183,65 +181,35 @@ class _SinkPortalState extends State<SinkPortal> {
                 ),
               ),
             ),
-            if (option['inputBox'] == true) // Check if an input box is needed
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.format_list_numbered, // Add the number icon here
-                      color: ColorPallete.color3, // Set the icon color
-                    ),
-                    labelText: 'Enter Pin',
-                    labelStyle: TextStyle(color: ColorPallete.color3),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: ColorPallete.color3,
-                      ), // Set the border color here
-                    ),
-                  ),
-                  keyboardType: TextInputType.number,
-                  // Set keyboardType to number
-                  style: const TextStyle(
-                    color: ColorPallete.color3,
-                  ), // Set text color inside the text box
-                  onChanged: (value) {
-                    setState(() {
-                      pinCode = int.tryParse(value) ?? 0; // Update the pin code value
-                    });
-                  },
-                ),
-              ),
-            if (reduceEmissionData['icon'] ==
-                Icons.card_travel) // Only add Home button if the card is for tree options
+            if (reduceEmissionData['icon'] == Icons.card_travel)
               SizedBox(
                 width: double.infinity,
                 child: SizedBox(
-                  height: 50, // Adjust height for a pleasing appearance
-                  width: double.infinity, // Set the width to match the Home button
+                  height: 50,
+                  width: double.infinity,
                   child: Center(
                     child: TextButton.icon(
                       onPressed: () {
-                        _showImageDialog(context, option['qrImage'], option['qrText']); // Show image dialog on Buy button press
+                        _showImageDialog(
+                            context, option['qrImage'], option['qrText']);
                       },
                       icon: const Icon(
                         Icons.shopping_cart,
                         color: ColorPallete.color3,
-                      ), // Change the icon color here
+                      ),
                       label: const Text(
                         'Buy',
                         style: TextStyle(
                           color: ColorPallete.color3,
-                        ), // Specify the color for the Buy button text here
+                        ),
                       ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                           ColorPallete.cardBackground.withBlue(150),
-                        ), // Set the background color here
+                        ),
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                30), // Adjust the border radius for a pleasing shape
+                            borderRadius: BorderRadius.circular(30),
                           ),
                         ),
                       ),
@@ -293,31 +261,29 @@ class _SinkPortalState extends State<SinkPortal> {
           backgroundColor: ColorPallete.cardBackground,
           title: Text(
             qrText,
-            style: TextStyle(color: ColorPallete.color3), // Set text color here
+            style: const TextStyle(color: ColorPallete.color3),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
                 qrImage,
-                width: 200, // Adjust the width of the image as needed
-                height: 200, // Adjust the height of the image as needed
+                width: 200,
+                height: 200,
               ),
-              // Static text for Name, Location, and Contact
-              Text(
+              const Text(
                 'Name: farmer1',
                 style: TextStyle(color: ColorPallete.color3),
               ),
-              Text(
+              const Text(
                 'Location: puducerry',
                 style: TextStyle(color: ColorPallete.color3),
               ),
-              Text(
+              const Text(
                 'Contact: 122345667',
                 style: TextStyle(color: ColorPallete.color3),
               ),
-
-              Text(
+              const Text(
                 'Price: 500 INR/per tree',
                 style: TextStyle(color: ColorPallete.color3),
               ),
@@ -328,9 +294,9 @@ class _SinkPortalState extends State<SinkPortal> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
+              child: const Text(
                 "Close",
-                style: TextStyle(color: ColorPallete.color3), // Set text color here
+                style: TextStyle(color: ColorPallete.color3),
               ),
             ),
           ],
@@ -357,28 +323,23 @@ class _SinkPortalState extends State<SinkPortal> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _showHomeButton
           ? FloatingActionButton.extended(
-        shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        backgroundColor:
-        ColorPallete.cardBackground.withBlue(150),
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            StartScreen.routeName,
-          );
-        },
-        label: const Text(
-          "Home",
-          style: TextStyle(
-            color: ColorPallete.color3,
-          ),
-        ),
-        icon: const Icon(
-          Icons.home,
-          color: ColorPallete.color3,
-        ),
-      )
+              shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              backgroundColor:
+                  ColorPallete.cardBackground.withBlue(150),
+             onPressed: _openGoogleMaps,
+              label: const Text(
+                "Maps",
+                style: TextStyle(
+                  color: ColorPallete.color3,
+                ),
+              ),
+              icon: const Icon(
+                Icons.map,
+                color: ColorPallete.color3,
+              ),
+            )
           : null,
     );
   }
