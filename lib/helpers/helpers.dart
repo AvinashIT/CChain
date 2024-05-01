@@ -94,4 +94,6 @@ class CarbonFootPrint {
         getRecycleFootPrint(recycle1,recycle2,
             recycle3,);
   }
+
+ 
 }
