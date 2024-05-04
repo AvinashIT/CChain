@@ -50,8 +50,8 @@ class _UserInputsState extends State<UserInputs> {
           child: args == 'Recycle'
               ? _buildRecyclePhase(size, questions)
               : args == 'travel'
-                  ? _buildTransportPhase(size, questions)
-                  : _buildManufacturePhase(size, questions),
+              ? _buildTransportPhase(size, questions)
+              : _buildManufacturePhase(size, questions),
         ),
       ),
     );
@@ -116,7 +116,7 @@ class _UserInputsState extends State<UserInputs> {
                 ),
                 Align(
                   child: SizedBox(
-                    width: size.width * 0.4,
+                    width: size.width * 0.7,
                     child: Row(
                       children: [
                         ElevatedButton(
@@ -160,13 +160,13 @@ class _UserInputsState extends State<UserInputs> {
                                             fetching = true;
                                           });
                                           Timer(Duration(seconds: delaySeconds),
-                                              () {
-                                            setState(() {
-                                              fetching = false;
-                                            });
-                                            _answerController.text =
-                                                Random().nextInt(100).toString();
-                                          });
+                                                  () {
+                                                setState(() {
+                                                  fetching = false;
+                                                });
+                                                _answerController.text =
+                                                    Random().nextInt(100).toString();
+                                              });
                                           Navigator.of(context).pop();
                                         },
                                         child: const Text(
@@ -206,17 +206,17 @@ class _UserInputsState extends State<UserInputs> {
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
                                     valueColor:
-                                        AlwaysStoppedAnimation<Color>(
+                                    AlwaysStoppedAnimation<Color>(
                                       ColorPallete.color3,
                                     ),
                                   ),
                                 )
                               else
-                                const Icon(Icons.autorenew,
+                                const Icon(Icons.recycling,
                                     color: ColorPallete.color3,),
                               const SizedBox(width: 5),
                               Text(
-                                fetching ? 'Fetching...' : 'Auto',
+                                fetching ? 'Fetching...' : 'A',
                                 style: const TextStyle(
                                   color: ColorPallete.color3,
                                 ),
@@ -251,7 +251,7 @@ class _UserInputsState extends State<UserInputs> {
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
-                                        CarbonFootPrint.getRecycleFootPrint(
+                                    CarbonFootPrint.getRecycleFootPrint(
                                       answers[0],
                                       answers[1],
                                       answers[2],
@@ -263,8 +263,8 @@ class _UserInputsState extends State<UserInputs> {
                                         builder: (context) => ResultScreen(
                                           userEmission: footprint,
                                           averageEmission:
-                                              CarbonFootPrint
-                                                  .avgEmissionDueToRecyclePerDay,
+                                          CarbonFootPrint
+                                              .avgEmissionDueToRecyclePerDay,
                                           activityName: "Recycle Unit",
                                           key: UniqueKey(),
                                         ),
@@ -360,7 +360,7 @@ class _UserInputsState extends State<UserInputs> {
                 ),
                 Align(
                   child: SizedBox(
-                    width: size.width * 0.4,
+                    width: size.width * 0.7,
                     child: Row(
                       children: [
                         ElevatedButton(
@@ -404,13 +404,13 @@ class _UserInputsState extends State<UserInputs> {
                                             fetching = true;
                                           });
                                           Timer(Duration(seconds: delaySeconds),
-                                              () {
-                                            setState(() {
-                                              fetching = false;
-                                            });
-                                            _answerController.text =
-                                                Random().nextInt(100).toString();
-                                          });
+                                                  () {
+                                                setState(() {
+                                                  fetching = false;
+                                                });
+                                                _answerController.text =
+                                                    Random().nextInt(100).toString();
+                                              });
                                           Navigator.of(context).pop();
                                         },
                                         child: const Text(
@@ -450,17 +450,18 @@ class _UserInputsState extends State<UserInputs> {
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
                                     valueColor:
-                                        AlwaysStoppedAnimation<Color>(
+                                    AlwaysStoppedAnimation<Color>(
                                       ColorPallete.color3,
                                     ),
                                   ),
                                 )
                               else
-                                const Icon(Icons.autorenew,
+                                const Icon(Icons.drive_eta,
+
                                     color: ColorPallete.color3,),
                               const SizedBox(width: 5),
                               Text(
-                                fetching ? 'Fetching...' : 'Auto',
+                                fetching ? 'Fetching...' : 'A',
                                 style: const TextStyle(
                                   color: ColorPallete.color3,
                                 ),
@@ -495,7 +496,7 @@ class _UserInputsState extends State<UserInputs> {
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
-                                        CarbonFootPrint.getTravelFootPrint(
+                                    CarbonFootPrint.getTravelFootPrint(
                                       answers[0],
                                       answers[1],
                                       answers[2],
@@ -508,8 +509,8 @@ class _UserInputsState extends State<UserInputs> {
                                         builder: (context) => ResultScreen(
                                           userEmission: footprint,
                                           averageEmission:
-                                              CarbonFootPrint
-                                                  .avgEmissionDueToManufacture,
+                                          CarbonFootPrint
+                                              .avgEmissionDueToManufacture,
                                           activityName: "Transport Unit",
                                           key: UniqueKey(),
                                         ),
@@ -601,7 +602,7 @@ class _UserInputsState extends State<UserInputs> {
                 ),
                 Align(
                   child: SizedBox(
-                    width: size.width * 0.4,
+                    width: size.width * 0.7,
                     child: Row(
                       children: [
                         ElevatedButton(
@@ -645,13 +646,13 @@ class _UserInputsState extends State<UserInputs> {
                                             fetching = true;
                                           });
                                           Timer(Duration(seconds: delaySeconds),
-                                              () {
-                                            setState(() {
-                                              fetching = false;
-                                            });
-                                            _answerController.text =
-                                                Random().nextInt(100).toString();
-                                          });
+                                                  () {
+                                                setState(() {
+                                                  fetching = false;
+                                                });
+                                                _answerController.text =
+                                                    Random().nextInt(100).toString();
+                                              });
                                           Navigator.of(context).pop();
                                         },
                                         child: const Text(
@@ -680,7 +681,7 @@ class _UserInputsState extends State<UserInputs> {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorPallete.background,),
+                                ColorPallete.color4,),
                           ),
                           child: Row(
                             children: [
@@ -691,17 +692,17 @@ class _UserInputsState extends State<UserInputs> {
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
                                     valueColor:
-                                        AlwaysStoppedAnimation<Color>(
+                                    AlwaysStoppedAnimation<Color>(
                                       ColorPallete.color3,
                                     ),
                                   ),
                                 )
                               else
-                                const Icon(Icons.autorenew,
+                                const Icon(Icons.power,
                                     color: ColorPallete.color3,),
                               const SizedBox(width: 5),
                               Text(
-                                fetching ? 'Fetching...' : 'Auto',
+                                fetching ? 'Fetching...' : 'A',
                                 style: const TextStyle(
                                   color: ColorPallete.color3,
                                 ),
@@ -736,7 +737,7 @@ class _UserInputsState extends State<UserInputs> {
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
-                                        CarbonFootPrint.getManufacturingFootPrint(
+                                    CarbonFootPrint.getManufacturingFootPrint(
                                       answers[0],
                                       answers[1],
                                       answers[2],
@@ -748,8 +749,8 @@ class _UserInputsState extends State<UserInputs> {
                                         builder: (context) => ResultScreen(
                                           userEmission: footprint,
                                           averageEmission:
-                                              CarbonFootPrint
-                                                  .avgEmissionDueToTravel,
+                                          CarbonFootPrint
+                                              .avgEmissionDueToTravel,
                                           activityName: "Manufacture Unit",
                                           key: UniqueKey(),
                                         ),

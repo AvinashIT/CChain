@@ -294,7 +294,7 @@ class RecOmr extends StatelessWidget {
           ),
         ],
       ),
-      )
+      ),
     );
   }
 }
