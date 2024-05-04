@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 class SplashScreen extends StatefulWidget {
 	static const routeName = "/SplashScreen";
 
-	const SplashScreen({Key? key}) : super(key: key);
+	const SplashScreen({super.key});
 
 	@override
 	State<SplashScreen> createState() => _SplashScreenState();
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen>
 		SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 		_controller = AnimationController(
 			vsync: this,
-			duration: Duration(seconds: 5), // Adjust duration as needed
+			duration: const Duration(seconds: 5), // Adjust duration as needed
 		)..repeat(); // Make the animation repeat indefinitely
 
 		Future.delayed(const Duration(seconds: 5), () {
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
 											height: 150,
 											width: 150,
 										),
-										SizedBox(height: 20),
+										const SizedBox(height: 20),
 										const Text(
 											'Carbon chain',
 											style: TextStyle(

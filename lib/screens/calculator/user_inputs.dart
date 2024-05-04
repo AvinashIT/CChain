@@ -195,12 +195,12 @@ class _UserInputsState extends State<UserInputs> {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorPallete.background),
+                                ColorPallete.background,),
                           ),
                           child: Row(
                             children: [
                               if (fetching)
-                                SizedBox(
+                                const SizedBox(
                                   width: 24,
                                   height: 24,
                                   child: CircularProgressIndicator(
@@ -212,8 +212,8 @@ class _UserInputsState extends State<UserInputs> {
                                   ),
                                 )
                               else
-                                Icon(Icons.autorenew,
-                                    color: ColorPallete.color3),
+                                const Icon(Icons.autorenew,
+                                    color: ColorPallete.color3,),
                               const SizedBox(width: 5),
                               Text(
                                 fetching ? 'Fetching...' : 'Auto',
@@ -247,7 +247,7 @@ class _UserInputsState extends State<UserInputs> {
                                     answers.add(_answerController.text);
                                   } else {
                                     answers.add(
-                                        double.parse(_answerController.text));
+                                        double.parse(_answerController.text),);
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
@@ -439,12 +439,12 @@ class _UserInputsState extends State<UserInputs> {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorPallete.background),
+                                ColorPallete.background,),
                           ),
                           child: Row(
                             children: [
                               if (fetching)
-                                SizedBox(
+                                const SizedBox(
                                   width: 24,
                                   height: 24,
                                   child: CircularProgressIndicator(
@@ -456,8 +456,8 @@ class _UserInputsState extends State<UserInputs> {
                                   ),
                                 )
                               else
-                                Icon(Icons.autorenew,
-                                    color: ColorPallete.color3),
+                                const Icon(Icons.autorenew,
+                                    color: ColorPallete.color3,),
                               const SizedBox(width: 5),
                               Text(
                                 fetching ? 'Fetching...' : 'Auto',
@@ -491,7 +491,7 @@ class _UserInputsState extends State<UserInputs> {
                                     answers.add(_answerController.text);
                                   } else {
                                     answers.add(
-                                        double.parse(_answerController.text));
+                                        double.parse(_answerController.text),);
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
@@ -680,12 +680,12 @@ class _UserInputsState extends State<UserInputs> {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                ColorPallete.background),
+                                ColorPallete.background,),
                           ),
                           child: Row(
                             children: [
                               if (fetching)
-                                SizedBox(
+                                const SizedBox(
                                   width: 24,
                                   height: 24,
                                   child: CircularProgressIndicator(
@@ -697,8 +697,8 @@ class _UserInputsState extends State<UserInputs> {
                                   ),
                                 )
                               else
-                                Icon(Icons.autorenew,
-                                    color: ColorPallete.color3),
+                                const Icon(Icons.autorenew,
+                                    color: ColorPallete.color3,),
                               const SizedBox(width: 5),
                               Text(
                                 fetching ? 'Fetching...' : 'Auto',
@@ -732,7 +732,7 @@ class _UserInputsState extends State<UserInputs> {
                                     answers.add(_answerController.text);
                                   } else {
                                     answers.add(
-                                        double.parse(_answerController.text));
+                                        double.parse(_answerController.text),);
                                   }
                                   if (index == questions.length - 1) {
                                     final double footprint =
