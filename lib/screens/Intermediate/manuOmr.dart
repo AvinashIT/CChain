@@ -1,8 +1,10 @@
-import 'package:CCHAIN/helpers/colors.dart';
-import 'package:CCHAIN/screens/calculator/user_inputs.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:flutter/material.dart';
+import 'package:CCHAIN/helpers/colors.dart';
+import 'package:CCHAIN/screens/calculator/user_inputs.dart';
 
 const TextStyle kTextStyle = TextStyle(
   fontSize: 24.0,
@@ -27,8 +29,14 @@ const TextStyle kTextStyle = TextStyle(
   ],
 );
 
-class ManuOme extends StatelessWidget {
+class ManuOme extends StatefulWidget {
   static const String routeName = '/ManuOme';
+
+  @override
+  _ManuOmeState createState() => _ManuOmeState();
+}
+
+class _ManuOmeState extends State<ManuOme> {
   TextEditingController nameController = TextEditingController();
   TextEditingController input1Controller = TextEditingController();
   TextEditingController input2Controller = TextEditingController();
@@ -37,6 +45,7 @@ class ManuOme extends StatelessWidget {
   List<String> vehicleTypes = ['BlueDart', 'DHL', 'Amazon', 'Agarwal Packets'];
   String selectedVehicleType = 'DHL'; // Default value
   String selectedType = 'Plastic'; // Default value for CC dropdown
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +54,7 @@ class ManuOme extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-           const Positioned.fill(
+            const Positioned.fill(
               child: FlareActor(
                 'assets/flare/base_one.flr',
                 animation: 'Flow',
@@ -113,7 +122,9 @@ class ManuOme extends StatelessWidget {
                                 child: DropdownButtonFormField<String>(
                                   value: selectedVehicleType,
                                   onChanged: (value) {
-                                    selectedVehicleType = value!;
+                                    setState(() {
+                                      selectedVehicleType = value!;
+                                    });
                                   },
                                   items: vehicleTypes.map((type) {
                                     return DropdownMenuItem<String>(
@@ -158,7 +169,7 @@ class ManuOme extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 38.0), // Adjusted padding here
+                                  padding: const EdgeInsets.only(left: 38.0),
                                   child: TextField(
                                     controller: input2Controller,
                                     keyboardType: TextInputType.text,
@@ -190,11 +201,13 @@ class ManuOme extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 1.0), // Adjusted padding here
+                                  padding: const EdgeInsets.only(left: 1.0),
                                   child: DropdownButtonFormField<String>(
                                     value: selectedType,
                                     onChanged: (value) {
-                                      selectedType = value!;
+                                      setState(() {
+                                        selectedType = value!;
+                                      });
                                     },
                                     items: ['Glass', 'Plastic', 'Fibre', 'Wood'].map((cc) {
                                       return DropdownMenuItem<String>(
@@ -240,7 +253,7 @@ class ManuOme extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 38.0), // Adjusted padding here
+                                  padding: const EdgeInsets.only(left: 38.0),
                                   child: TextField(
                                     controller: input4Controller,
                                     keyboardType: TextInputType.text,
@@ -287,21 +300,33 @@ class ManuOme extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 270), // Add some space between the buttons
+            const SizedBox(width: 20),
             FloatingActionButton(
               onPressed: () {
-                Navigator.pushNamed(context, UserInputs.routeName, arguments: 'manufacture');
+                setState(() {
+                  isLoading = true;
+                });
+                Timer(const Duration(seconds: 3), () {
+                  setState(() {
+                    isLoading = false;
+                    Navigator.pushNamed(context, UserInputs.routeName, arguments: 'manufacture');
+                  });
+                });
               },
               backgroundColor: ColorPallete.cardBackground.withBlue(150),
               shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text(
-                'Next',
-                style: TextStyle(
-                  color: ColorPallete.color3,
-                ),
-              ),
+              child: isLoading
+                  ? const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(ColorPallete.color3),
+                    )
+                  : const Text(
+                      'Next',
+                      style: TextStyle(
+                        color: ColorPallete.color3,
+                      ),
+                    ),
             ),
           ],
         ),

@@ -1,8 +1,8 @@
-import 'package:CCHAIN/helpers/colors.dart';
-import 'package:CCHAIN/screens/calculator/user_inputs.dart';
+import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:flutter/material.dart';
+import 'package:CCHAIN/helpers/colors.dart';
+import 'package:CCHAIN/screens/calculator/user_inputs.dart';
 
 const TextStyle kTextStyle = TextStyle(
   fontSize: 24.0,
@@ -27,8 +27,14 @@ const TextStyle kTextStyle = TextStyle(
   ],
 );
 
-class RecOmr extends StatelessWidget {
+class RecOmr extends StatefulWidget {
   static const String routeName = '/Rec_Omr';
+
+  @override
+  _RecOmrState createState() => _RecOmrState();
+}
+
+class _RecOmrState extends State<RecOmr> {
   TextEditingController nameController = TextEditingController();
   TextEditingController input1Controller = TextEditingController();
   TextEditingController input2Controller = TextEditingController();
@@ -37,6 +43,20 @@ class RecOmr extends StatelessWidget {
   List<String> vehicleTypes = ['BlueDart', 'DHL', 'Amazon', 'Agarwal Packets'];
   String selectedVehicleType = 'DHL'; // Default value
   String selectedType = 'Plastic'; // Default value for CC dropdown
+  bool _isLoading = false;
+
+  void _showLoading() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        _isLoading = false;
+        Navigator.pushNamed(context, UserInputs.routeName, arguments: 'Recycle');
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +67,9 @@ class RecOmr extends StatelessWidget {
           children: [
             const Positioned.fill(
               child: FlareActor(
-               'assets/flare/base_one.flr',
-            animation: 'Flow',
-            fit: BoxFit.cover,
-               
+                'assets/flare/base_one.flr',
+                animation: 'Flow',
+                fit: BoxFit.cover,
               ),
             ),
             SingleChildScrollView(
@@ -62,7 +81,7 @@ class RecOmr extends StatelessWidget {
                       child: FlareActor(
                         'assets/flare/food_1.flr',
                         animation: 'flow',
-                         alignment: Alignment.topCenter,
+                        alignment: Alignment.topCenter,
                       ),
                     ),
                     const SizedBox(
@@ -115,7 +134,9 @@ class RecOmr extends StatelessWidget {
                                 child: DropdownButtonFormField<String>(
                                   value: selectedVehicleType,
                                   onChanged: (value) {
-                                    selectedVehicleType = value!;
+                                    setState(() {
+                                      selectedVehicleType = value!;
+                                    });
                                   },
                                   items: vehicleTypes.map((type) {
                                     return DropdownMenuItem<String>(
@@ -160,7 +181,7 @@ class RecOmr extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 38.0), // Adjusted padding here
+                                  padding: const EdgeInsets.only(left: 38.0),
                                   child: TextField(
                                     controller: input2Controller,
                                     keyboardType: TextInputType.text,
@@ -192,11 +213,13 @@ class RecOmr extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 1.0), // Adjusted padding here
+                                  padding: const EdgeInsets.only(left: 1.0),
                                   child: DropdownButtonFormField<String>(
                                     value: selectedType,
                                     onChanged: (value) {
-                                      selectedType = value!;
+                                      setState(() {
+                                        selectedType = value!;
+                                      });
                                     },
                                     items: ['Glass', 'Plastic', 'Fibre', 'Wood'].map((cc) {
                                       return DropdownMenuItem<String>(
@@ -242,7 +265,7 @@ class RecOmr extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 38.0), // Adjusted padding here
+                                  padding: const EdgeInsets.only(left: 38.0),
                                   child: TextField(
                                     controller: input4Controller,
                                     keyboardType: TextInputType.text,
@@ -289,21 +312,23 @@ class RecOmr extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 270), // Add some space between the buttons
+            const SizedBox(width: 20),
             FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(context, UserInputs.routeName, arguments: 'Recycle');
-              },
+              onPressed: _showLoading,
               backgroundColor: ColorPallete.cardBackground.withBlue(150),
               shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text(
-                'Next',
-                style: TextStyle(
-                  color: ColorPallete.color3,
-                ),
-              ),
+              child: _isLoading
+                  ? const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(ColorPallete.color3),
+                    )
+                  : const Text(
+                      'Next',
+                      style: TextStyle(
+                        color: ColorPallete.color3,
+                      ),
+                    ),
             ),
           ],
         ),

@@ -1,8 +1,8 @@
-import 'package:CCHAIN/helpers/colors.dart';
-import 'package:CCHAIN/screens/calculator/user_inputs.dart';
+import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:flutter/material.dart';
+import 'package:CCHAIN/helpers/colors.dart';
+import 'package:CCHAIN/screens/calculator/user_inputs.dart';
 
 const TextStyle kTextStyle = TextStyle(
   fontSize: 24.0,
@@ -44,6 +44,20 @@ class _TransportBluetoothState extends State<TransportBluetooth> {
   String selectedVehicleType = 'DHL'; // Default value
   String selectedType = 'Truck'; // Default value for CC dropdown
   bool showButtons = true;
+  bool _isLoading = false;
+
+  void _showLoading() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        _isLoading = false;
+        Navigator.pushNamed(context, UserInputs.routeName, arguments: 'travel');
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +66,7 @@ class _TransportBluetoothState extends State<TransportBluetooth> {
       body: SafeArea(
         child: Stack(
           children: [
-           const Positioned.fill(
+            const Positioned.fill(
               child: FlareActor(
                 'assets/flare/base_one.flr',
                 animation: 'Flow',
@@ -308,21 +322,23 @@ class _TransportBluetoothState extends State<TransportBluetooth> {
                 ),
               ),
             ),
-            const SizedBox(width: 270), // Add some space between the buttons
+            const SizedBox(width: 20),
             FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(context, UserInputs.routeName, arguments: 'travel');
-              },
+              onPressed: _showLoading,
               backgroundColor: ColorPallete.cardBackground.withBlue(150),
               shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Text(
-                'Next',
-                style: TextStyle(
-                  color: ColorPallete.color3,
-                ),
-              ),
+              child: _isLoading
+                  ? const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(ColorPallete.color3),
+                    )
+                  : const Text(
+                      'Next',
+                      style: TextStyle(
+                        color: ColorPallete.color3,
+                      ),
+                    ),
             ),
           ],
         ),

@@ -128,7 +128,7 @@ class _UserInputsState extends State<UserInputs> {
                                   return AlertDialog(
                                     backgroundColor: ColorPallete.background,
                                     title: const Text(
-                                      "Connect Bluetooth",
+                                      "Connect Wifi",
                                       style: TextStyle(
                                         color: ColorPallete.color3,
                                       ),
@@ -614,7 +614,7 @@ class _UserInputsState extends State<UserInputs> {
                                   return AlertDialog(
                                     backgroundColor: ColorPallete.background,
                                     title: const Text(
-                                      "Connect Bluetooth",
+                                      "Connect Wifi",
                                       style: TextStyle(
                                         color: ColorPallete.color3,
                                       ),
